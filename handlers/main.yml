@@ -1,0 +1,6 @@
+---
+# handlers file for arm64_rpi_switch
+- name: Reboot Pi
+  ansible.builtin.reboot:
+    reboot_timeout: 3600
+  become: true

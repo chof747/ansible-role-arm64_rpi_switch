@@ -1,0 +1,18 @@
+---
+# tasks file for arm64_rpi_switch
+- name: Add arm_64bit=1 to /boot/config.txt
+  ansible.builtin.lineinfile:
+    path: '/boot/config.txt'
+    regexp: '^arm_64bit='
+    line: 'arm_64bit=1'
+  notify: Reboot Pi
+  become: true
+
+- name: Flush handlers for reboot
+  ansible.builtin.meta: flush_handlers
+
+- name: Update apt cache if needed
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
